@@ -10,7 +10,7 @@ const quizRoutes = require('./routes/quiz')
 app.use(express.json());
 
 // use individual routes
-app.use('/user', userRoutes)
+app.use('/users', userRoutes)
 app.use('/quiz', quizRoutes)
 
 app.listen(port, () => {
