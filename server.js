@@ -1,24 +1,18 @@
 const express = require('express')
-const mongoose = require('mongoose')
 const app = express()
+const port = 3000
 
-//routes
+// import individual routes
+const userRoutes = require('./routes/users')
+const quizRoutes = require('./routes/quiz')
 
-app.get('/', (req, res) => {
-    res.send('Hello NODE API')
-})
+// middleware
+app.use(express.json());
 
-app.get('/blog', (req, res) => {
-    res.send("Hello Blog!")
-})
+// use individual routes
+app.use('/user', userRoutes)
+app.use('/quiz', quizRoutes)
 
-mongoose
-.connect(process.env.MONGO_TRIVIA_STRING)
-.then(() => {
-    app.listen(3000, () => {
-        console.log(`Node API app is running on port 3000`)
-    })
-    console.log("connected to mongo db")
-}).catch((error) => {
-    console.log(error)
+app.listen(port, () => {
+    console.log(`Server is running on port ${port}`)
 })
